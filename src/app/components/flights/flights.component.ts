@@ -21,6 +21,8 @@ export class FlightsComponent implements OnInit {
   origin: string = ''
   destination: string = ''
   validated: boolean = false
+  error: boolean = false;
+  
 
   allFlights:Flight[] = []
   route: Route = {
@@ -62,8 +64,10 @@ export class FlightsComponent implements OnInit {
     console.log(this.destinationCtrl.value.toUpperCase())
     this.origin = this.originCtrl.value.toUpperCase()
     this.destination = this.destinationCtrl.value.toUpperCase()
+    if( this.origenes.length > 0 && this.destinos.length > 0&& this.arrayRuta.length > 0){
+      this.clearRoute()
+    }
     this.calcularRuta()
-
   }
 
   calcularRuta(){ 
@@ -71,8 +75,6 @@ export class FlightsComponent implements OnInit {
     console.log(this.route)
     console.log( this.arrayRuta)
     this.validated = true
-
-    
   }
   
   extraerOrigen(){
@@ -113,4 +115,25 @@ export class FlightsComponent implements OnInit {
     this.route.journey.flights.pop()
   }
     
+  clearRoute(){
+    this.origenes = []
+    this.destinos = []
+    this.arrayRuta = []
+    this.route = {
+      "journey" : {
+        "origin": "fdas",
+        "destination": "fdsa",
+        "price": 0,
+        "flights": [
+          {
+            "departureStation": '',
+            "arrivalStation": '',
+            "flightCarrier": '',
+            "flightNumber": ' ',
+            "price": 0
+          }
+        ]
+      }
+    }
+  }
 }
