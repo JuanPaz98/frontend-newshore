@@ -9,6 +9,8 @@ import { FlightsComponent } from './components/flights/flights.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HeaderComponent } from './components/header/header.component';
 import { TripDetailComponent } from './components/trip-detail/trip-detail.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { CopPipe } from './pipes/cop.pipe';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { TripDetailComponent } from './components/trip-detail/trip-detail.compon
     FlightsComponent,
     NavbarComponent,
     HeaderComponent,
-    TripDetailComponent
+    TripDetailComponent,
+    FooterComponent,
+    CopPipe
 
   ],
   imports: [

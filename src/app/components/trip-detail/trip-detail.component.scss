@@ -30,15 +30,15 @@
     cursor: pointer;
 }
 
-/* resolucion para móviles */
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 720px) {
     .trip{
+        width: 100%;
         display: flex;
         flex-direction: column;
         align-items:center;
         justify-content:center;
         text-align: center;
-        width: 20em;
+
         margin: 0;
         height: 80%;
         position: relative;

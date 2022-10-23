@@ -17,6 +17,7 @@
     <div class="flight-information" *ngIf="validated == true; else noRoute">
         <div class="flight-resume" *ngIf="arrayRuta.length > 0; else error">
             <h2>Vuelo de {{route.journey.origin}} a {{route.journey.destination}}</h2>
+            <span>total escalas: {{route.journey.flights.length}}</span>
             <p>Precio Total: {{route.journey.price}}</p>
         </div>
         <ng-template #error >
@@ -26,7 +27,7 @@
             </div>
         </ng-template>
         
-        <div *ngFor="let i of route.journey.flights">
+        <div *ngFor="let i of route.journey.flights" class="flight-container">
             <div class="flight-header">
                 <div class="flight-header-left">
                     <img src="../../../assets/icons/ribbon.png" width="30px" alt="">

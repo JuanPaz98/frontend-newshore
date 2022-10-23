@@ -21,7 +21,8 @@ export class FlightsComponent implements OnInit {
   origin: string = ''
   destination: string = ''
   validated: boolean = false
-  error: boolean = false;
+  error: boolean = false
+  counter: number[] = []
   
 
   allFlights:Flight[] = []
@@ -60,14 +61,13 @@ export class FlightsComponent implements OnInit {
   }
   getDataCtrl(event: Event){
     event.preventDefault();
-    console.log(this.originCtrl.value.toUpperCase())
-    console.log(this.destinationCtrl.value.toUpperCase())
     this.origin = this.originCtrl.value.toUpperCase()
     this.destination = this.destinationCtrl.value.toUpperCase()
     if( this.origenes.length > 0 && this.destinos.length > 0&& this.arrayRuta.length > 0){
       this.clearRoute()
     }
     this.calcularRuta()
+
   }
 
   calcularRuta(){ 
@@ -89,36 +89,48 @@ export class FlightsComponent implements OnInit {
   calculo(){
     this.extraerOrigen()
     this.extraerDestino()
+    this.route.journey.flights.pop()
+    
     let totalPrice = 0
     for(let i = 0; i < this.origenes.length; i++){
       let coinciden = false;
-
-      for(let j = 0; j < this.destinos.length && coinciden == false; j++){
-        if(this.origenes[i].arrivalStation == this.destinos[j].departureStation){
-          this.arrayRuta.push(this.destinos[j])
-          this.route.journey.destination = this.destinos[j].arrivalStation 
-          totalPrice += this.destinos[j].price
-          coinciden = true
-        }
-      }
-      if(coinciden){
+      if(this.origenes[i].departureStation == this.origin && this.origenes[i].arrivalStation == this.destination){
         this.arrayRuta.push(this.origenes[i])
         this.route.journey.origin = this.origenes[i].departureStation
-        totalPrice += this.origenes[i].price
+        this.route.journey.destination = this.origenes[i].arrivalStation
+        totalPrice = this.origenes[i].price
       }
+      else{
+        for(let j = 0; j < this.destinos.length && coinciden == false; j++){
+          if(this.origenes[i].arrivalStation == this.destinos[j].departureStation){
+            this.arrayRuta.push(this.destinos[j])
+            this.route.journey.destination = this.destinos[j].arrivalStation 
+            totalPrice += this.destinos[j].price
+            coinciden = true
+            
+          }
+        }
+        if(coinciden){
+          this.arrayRuta.push(this.origenes[i])
+          this.route.journey.origin = this.origenes[i].departureStation
+          totalPrice += this.origenes[i].price
+        }
+        
+      }
+
     }
     this.route.journey.price = totalPrice
     for(let k = 0; k<this.arrayRuta.length; k++) {
       this.route.journey.flights.unshift(this.arrayRuta[k])
     }
-
-    this.route.journey.flights.pop()
   }
     
   clearRoute(){
     this.origenes = []
     this.destinos = []
     this.arrayRuta = []
+    this.originCtrl.reset()
+    this.destinationCtrl.reset()
     this.route = {
       "journey" : {
         "origin": "fdas",
