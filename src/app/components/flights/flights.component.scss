@@ -1,0 +1,147 @@
+.main-container{
+    width: 100%;
+    padding: 5rem;
+    background-color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .form{
+        width: 30%;
+        .wrapper{
+            border-radius: 10px;
+            width: 100%;
+            padding: 30px;
+            box-shadow: 0px 0px 15px rgba(0,0,0,0.2);
+            background-color: white;
+            .input-container{
+                margin-bottom: 20px;
+                height: 40px;
+                width: 100%;
+                position: relative;
+                input{
+                    height: 100%;
+                    width: 100%;
+                    border: none;
+                    outline: none;
+                    border-bottom: 2px solid silver;
+                }
+                input:focus ~ label,
+                input:valid ~ label {
+                    transform: translateY(-20px);
+                    font-size: 15px;
+                    color: lightblue;
+                } 
+                label{
+                    position: absolute;
+                    bottom: 10px;
+                    left: 0;
+                    color: gray;
+                    pointer-events: none;
+                    transition: all 0.3s ease;
+                }
+                .underline{
+                    position: absolute;
+                    bottom: 0;
+                    height: 2px;
+                    width: 100%;
+                }
+                .underline:before{
+                    position: absolute;
+                    content: " ";
+                    height: 100%;
+                    width: 100%;
+                    background-color:red;
+                    transform: scaleX(0);
+                    transition: transform 0.3s ease;
+                }
+                input:focus ~ .underline:before,
+                input:valid ~ .underline:before {
+                    transform: scaleX(1)
+                } 
+            }
+            .btn-calc{
+                display: block;
+                border-radius: 10px;
+                height: 40px;
+                margin: 0 auto;
+                width: 50%;
+                background-color: #FB3640;
+                cursor: pointer;
+            }
+        }
+    }
+    .flight-resume{
+        width: 100%;
+        padding: 30px;
+        text-align: center;
+        border-bottom: 2px solid silver;
+        margin-bottom: 20px;
+        h2{
+            font-size: 30px;
+            font-weight: bold;            
+        }
+        p{
+            font-size: 20px;
+        }
+    }
+    .flight-information{
+        width: 60%;
+        padding: 30px;
+        box-shadow: 0px 0px 15px rgba(0,0,0,0.2);
+        background-color: white;
+        border-radius: 10px;
+        }
+        .flight-header{
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 10px;;
+            border-bottom: 1px solid silver;
+            .flight-header-left{
+                display: flex;
+                align-items: center;
+                font-size: 24px;
+                font-weight: bold;
+            }
+            .flight-header-right{
+                text-align: right;
+                font-size: 12px;
+            }
+        }
+        .flight-content{
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 10px;
+            margin: 10px 0;
+            .flight-content-left,
+            .flight-content-right{
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content:center;
+                align-items: center;
+                h2{
+                    font-size: 32px;
+                    font-weight: bold;
+                }
+            }
+        }
+        .flight-price{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-top: 10px;
+            h2{
+                font-size: 20px;
+                font-weight: bold;
+            }
+        }
+    }
+    .img-container {
+        width: 350px;
+        margin: 0 auto;
+        img{
+            width: 100%;
+        }
+}

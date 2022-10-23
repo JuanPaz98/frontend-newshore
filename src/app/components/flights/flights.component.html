@@ -1,6 +1,54 @@
-<p>flights works!</p>
-<ul *ngFor="let i of flights">
-    <li>{{i.departureStation}}</li>
-</ul>
-
-<button (click)="getFlights()">data</button>
+<section class="main-container">
+    <form action="#" class="form">
+        <div class="wrapper">
+            <div class="input-container">
+                <input type="text" required [formControl]="originCtrl" [maxlength]="3" [minlength]="3">
+                <label for="">Origen</label>
+                <div class="underline"></div>
+            </div>
+            <div class="input-container">
+                <input type="text" required [formControl]="destinationCtrl" [maxlength]="3" [minlength]="3">
+                <label for="">Destino</label>
+                <div class="underline"></div> 
+            </div>
+            <button #buttonCalc class="btn-calc" [disabled]="originCtrl.invalid || destinationCtrl.invalid || originCtrl.value == destinationCtrl.value" (click)="getDataCtrl($event)">Buscar Vuelos</button>
+        </div>
+    </form>
+    <div class="flight-information" *ngIf="validated == true; else noRoute">
+        <div class="flight-resume" *ngIf="validated == true">
+            <h2>Vuelo de {{route.journey.origin}} a {{route.journey.destination}}</h2>
+            <p>Precio Total: {{route.journey.price}}</p>
+        </div>
+        <div *ngFor="let i of route.journey.flights">
+            <div class="flight-header">
+                <div class="flight-header-left">
+                    <img src="../../../assets/icons/ribbon.png" width="30px" alt="">
+                    <h3>{{i.flightCarrier}} Airlines</h3>
+                </div>
+                <div class="flight-header-right">
+                    <p>Vuelo N° {{i.flightNumber}}</p>
+                    <p>Clase Economica</p>
+                </div>
+            </div>
+            <div class="flight-content">
+                <div class="flight-content-left">
+                    <h2>{{i.departureStation}}</h2>
+                    <img src="../../../assets/icons/avion-left.png" alt="">
+                </div>
+                <div class="flight-content-right">
+                    <h2>{{i.arrivalStation}}</h2>
+                    <img src="../../../assets/icons/avion-right.png" alt="">
+                </div>
+            </div>
+            <div class="flight-price">
+                <h2>precio: {{i.price}}</h2>
+            </div>
+        </div>
+    </div>
+    <ng-template #noRoute>
+        <figure class="img-container" >
+            <img src="../../../assets/images/avion.png" alt="">
+        </figure>
+    </ng-template>
+    
+</section>
